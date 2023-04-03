@@ -7,6 +7,19 @@
   pointer-events: none;
 }
 
+.container::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+}
+
+.container::-webkit-scrollbar-track {
+  background-color: #f2f2f2;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
