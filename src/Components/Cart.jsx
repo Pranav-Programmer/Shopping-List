@@ -1,6 +1,82 @@
 import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  container:{
+    backgroundColor: '#ffc0cb', 
+    height: '100vh', 
+    display: 'flex', 
+    flexDirection: 'column', 
+    alignItems: 'center', 
+    justifyContent: 'center'
+  },
+  list:{
+    textAlign: 'center', 
+    margin: '0 0 1rem 0'
+  },
+  insideContainer:{
+    backgroundColor: '#ffffff', 
+    width: '30%', 
+    minWidth:'17rem',
+    padding: '0 2rem 0 2rem', 
+    border: '2px dashed black', 
+    marginBottom:'1rem', 
+    overflowY: 'auto'
+  },
+  itemText:{
+    textAlign: 'center', 
+    marginBottom: '3rem'
+  },
+  itemForm:{
+    display: 'flex', 
+    alignItems: 'center', 
+    justifyContent: 'center'
+  },
+  itemInput:{
+    width: '50%', 
+    minWidth:'8rem',
+    borderBlockColor: '#000', 
+    borderBlockWidth: '1px', 
+    borderTopLeftRadius: '10px', 
+    borderBottomLeftRadius: '10px', 
+    fontSize: '1rem', 
+    height: '2rem'
+  },
+  itemADD:{
+    backgroundColor: '#0000ff', 
+    color: 'white', 
+    border: 'none', 
+    borderTopRightRadius: '1rem', 
+    borderBottomRightRadius: '1rem', 
+    fontSize: '1rem', 
+    width: '20%', 
+    minWidth:'2rem' ,
+    height: '2.35rem', 
+    marginLeft: '-.5rem', 
+    cursor: 'pointer'
+  },
+  ul:{
+    marginTop: '2rem'
+  },
+  li:{
+    display: 'flex', 
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
+    textAlign: 'justify', 
+    wordWrap: 'break-word'
+  },
+  button:{
+    backgroundColor: 'transparent', 
+    border: 'none', 
+    color: 'red', 
+    cursor: 'pointer', 
+    fontSize: '1.5rem', 
+    fontWeight: 'bold'
+  }
+}));
 
 function ShoppingList() {
+  const classes = useStyles();
   const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppingListItems')));
 
   useEffect(() => {
@@ -31,19 +107,19 @@ function ShoppingList() {
   }, [items]);
 
   return (
-    <div style={{ backgroundColor: '#ffc0cb', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-      <h1 style={{ textAlign: 'center', margin: '0 0 1rem 0' }}>Shopping List</h1>
-      <div style={{ backgroundColor: '#ffffff', width: '30%', minWidth:'17rem' ,padding: '0 2rem 0 2rem', border: '2px dashed black', marginBottom:'1rem', overflowY: 'auto' }}>
-        <h1 style={{ textAlign: 'center', marginBottom: '3rem' }}>Items To Buy</h1>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <input type="text" name="itemName" placeholder="Add a new item" style={{ width: '50%', minWidth:'8rem',borderBlockColor: '#000', borderBlockWidth: '1px', borderTopLeftRadius: '10px', borderBottomLeftRadius: '10px', fontSize: '1rem', height: '2rem' }} />
-          <button type="submit" style={{ backgroundColor: '#0000ff', color: 'white', border: 'none', borderTopRightRadius: '1rem', borderBottomRightRadius: '1rem', fontSize: '1rem', width: '20%', minWidth:'2rem' ,height: '2.35rem', marginLeft: '-.5rem', cursor: 'pointer' }}>Add</button>
+    <div className={classes.container}>
+      <h1 className={classes.list}>Shopping List</h1>
+      <div className={classes.insideContainer}>
+        <h1 className={classes.itemText}>Items To Buy</h1>
+        <form className={classes.itemForm} onSubmit={handleSubmit}>
+          <input className={classes.itemInput} type="text" name="itemName" placeholder="Add a new item" />
+          <button className={classes.itemADD} type="submit">Add</button>
         </form>
-        <ul style={{ marginTop: '2rem'}}>
-          {items.map((item, index) => (
-            <li key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', textAlign: 'justify', wordWrap: 'break-word' }}>
+        <ul className={classes.ul}>
+          {items?.map((item, index) => (
+            <li key={index} className={classes.li}>
               {item}
-              <button onClick={() => handleRemoveItem(index)} style={{ backgroundColor: 'transparent', border: 'none', color: 'red', cursor: 'pointer', fontSize: '1.5rem', fontWeight: 'bold' }}>X</button>
+              <button className={classes.button} onClick={() => handleRemoveItem(index)}>X</button>
             </li>
           ))}
         </ul>
