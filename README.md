@@ -12,7 +12,7 @@ The Shopping List Component is a reusable React component that allows users to c
 ## Installation
 To use the Shopping List Component in your React web app, follow these steps:
 
-Install the required dependencies:
+1. Install the required dependencies:
 
 ```bash
   npm install @material-ui/core
